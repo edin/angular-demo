@@ -1,24 +1,53 @@
-<md-toolbar color="primary">
-    <span>MyCompany</span>
-    <span class="example-spacer"></span>
-    <button md-button [mdMenuTriggerFor]="appMenu"><md-icon>menu</md-icon> Menu</button>
-</md-toolbar>
-
 <md-menu #appMenu="mdMenu">
   <button md-menu-item> Settings </button>
   <button md-menu-item> Help </button>
 </md-menu>
 
-<md-card class="example-card" *ngFor="let data of (myData ? myData.slice(0,10): []); let i = index">
+<md-sidenav-container class="example-container">
+    <md-sidenav #sidenav class="example-sidenav" mode="side" opened="true">
+      <!--
+      <md-list>
+        <md-list-item><button md-button [routerLink]="['/dashboard']">Dashboard</button></md-list-item>
+        <md-list-item><button md-button [routerLink]="['/settings']">Settings</button></md-list-item>
+        <md-list-item><button md-button [routerLink]="['/about']">About</button></md-list-item>
+      </md-list>
+     
+      <md-nav-list>
+        <md-list-item *ngFor="let link of [1,2,3,4,5]">
+          <a md-line href="...">{{ link }}</a>
+          <button md-icon-button (click)="showInfo(link)">
+              <md-icon>info</md-icon>
+          </button>
+        </md-list-item>
+      </md-nav-list>
+       -->
 
-  <img md-card-image src="{{ data.url }}">
-  <md-card-header>
-    <md-card-title>{{ data.title }}</md-card-title>
-  </md-card-header>
+    <md-nav-list>
+      <h3 md-subheader>Folders</h3>
+      <md-list-item *ngFor="let folder of [1,2,3,4,5]">
+          <md-icon md-list-icon>folder</md-icon>
+          <a md-line [routerLink]="['/dashboard/'+folder]">Folder {{folder}}</a>
+      </md-list-item>
 
-  <md-card-actions>
-    <button md-button>LIKE</button>
-    <button md-button>SHARE</button>
-  </md-card-actions>
-  
-</md-card>
+      <md-divider></md-divider>
+      <h3 md-subheader>Notes</h3>
+      <md-list-item *ngFor="let folder of [1,2,3,4,5]">
+          <md-icon md-list-icon>note</md-icon>
+          <a md-line [routerLink]="['/dashboard']">Note {{folder}}</a>
+      </md-list-item>
+    </md-nav-list>  
+  </md-sidenav>
+
+  <div>
+    <md-toolbar color="primary">
+      <button md-icon-button><md-icon>menu</md-icon></button>
+      <span>Application</span>
+      <span class="example-spacer"></span>
+      <button md-button [mdMenuTriggerFor]="appMenu"><md-icon>menu</md-icon> Menu</button>
+      <md-icon class="example-icon">verified_user</md-icon>
+    </md-toolbar>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</md-sidenav-container>
